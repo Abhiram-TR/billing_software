@@ -9,15 +9,20 @@ class StockCurrentAdmin(admin.ModelAdmin):
 
 @admin.register(StockIn)
 class StockInAdmin(admin.ModelAdmin):
-    list_display = ('id', 'm_id', 'quantity', 'taxable_value', 'tax_percentage', 'date')
+    list_display = ('id', 'm_id', 'quantity', 'taxable_value', 'tax_percentage','amount', 'date')
     search_fields = ('m_id__material_name', 'date')
     list_filter = ('date', 'tax_percentage')
 
 @admin.register(Bill)
 class BillAdmin(admin.ModelAdmin):
-    list_display = ('invoice_number', 'm_id', 'date', 'bill_to_party', 'ship_to_party', 'quantity', 'rate', 'amount', 'gross_value', 'total', 'sgst', 'cgst', 'grand_total')
-    search_fields = ('invoice_number', 'm_id__material_name', 'bill_to_party', 'ship_to_party')
-    list_filter = ('date', 'rate_of_tax')
+    list_display = (
+        'invoice_number', 'm_id', 'date', 'bill_to_party', 'gstin_B', 
+        'ship_to_party', 'gstin_s', 'hsn_code', 'rate_of_tax', 
+        'quantity', 'rate', 'amount', 'gross_value', 'total', 'grand_total'
+    )
+    search_fields = ('invoice_number', 'bill_to_party', 'gstin_B', 'ship_to_party', 'gstin_s', 'hsn_code')
+    list_filter = ('date', 'rate_of_tax', 'quantity', 'rate', 'total', 'grand_total')
+    ordering = ('-date',)
 
 # Registering the models without decorators:
 # admin.site.register(StockCurrent, StockCurrentAdmin)

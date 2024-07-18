@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+        }
+        .header p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+        span{
+            margin:0;
+        }
+        .details div span {
+            font-size: 14px;
+            color: #333;
+        }   
+        .section h3 {
+            margin: 0;
+            font-size: 16px;
+            color: #333;
+        }
+        .section div {
+            width: 45%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            font-size: 14px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .total {
+            text-align: right;
+        }
+        .total h3 {
+            margin: 0;
+            font-size: 16px;
+            color: #333;
+        }
+        .total div {
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>THAMPI TRADERS</h1>
+            <p>GST No.: 32AHYPG3985B1Z6</p>
+            <p>TC 19/607-10, South Road, Mudavanmugal, Poojappura-P.O., Trivandrum - 695012</p>
+            <p>Ph: 9895027162, 6235202024, 8921221612</p>
+        </div>
+        <div class="details">
+            <div>
+                <span>Invoice No.: {{ bill.invoice_number }}</span>
+                <span>Date of issue: {{ bill.date }}</span>
+            </div>
+            <div>
+                <span>State: KERALA</span>
+                <span>State Code: 32</span>
+            </div>
+        </div>
+        <div class="section">
+            <div>
+                <h3>Bill to party</h3>
+                <p>Name: {{ bill.bill_to_party }}</p>
+                <p>GSTIN: {{ bill.gstin_B }}</p>
+            </div>
+            <div>
+                <h3>Ship to party</h3>
+                <p>Name: {{ bill.ship_to_party }}</p>
+                <p>GSTIN: {{ bill.gstin_s }}</p>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Sl No</th>
+                    <th>Name of Product</th>
+                    <th>HSN Code</th>
+                    <th>Rate of Tax</th>
+                    <th>Quantity</th>
+                    <th>Rate</th>
+                    <th>Amount</th>
+                    <th>Gross Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>{{ bill.m_id.material_name }}</td>
+                    <td>{{ bill.hsn_code }}</td>
+                    <td>{{ bill.rate_of_tax }}%</td>
+                    <td>{{ bill.quantity }}</td>
+                    <td>{{ bill.rate }}</td>
+                    <td>{{ bill.amount }}</td>
+                    <td>{{ bill.gross_value }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="total">
+            <h3>Total: {{ bill.total }}</h3>
+            <div>SGST: {{ sgst }}</div>
+            <div>CGST: {{ cgst }}</div>
+            <h3>Grand Total: {{ bill.grand_total }}</h3>
+        </div>
+    </div>
+</body>
+</html>

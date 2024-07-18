@@ -1,8 +1,9 @@
-from django.http import HttpResponseBadRequest
+from django.http import FileResponse, Http404, HttpResponse, HttpResponseBadRequest
 from .models import StockCurrent, StockIn, Bill
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from .forms import StockInForm
 from django.utils import timezone
+from .utils import generate_bill_pdf
 
 
 def stock_in_create(request):
@@ -58,10 +59,10 @@ def add_stock(request):
     print(materials)
     return render(request, 'billing_app/add_stock.html', {'materials': materials})
 
+
 def sell(request):
     if request.method == 'POST':
-        invoice_number = request.POST['invoice_number']
-        m_id = StockCurrent.objects.get(id=request.POST['m_id'])
+        m_id = StockCurrent.objects.get(m_id=request.POST['m_id'])
         date = request.POST['date']
         bill_to_party = request.POST['bill_to_party']
         gstin_B = request.POST['gstin_B']
@@ -71,16 +72,9 @@ def sell(request):
         rate_of_tax = float(request.POST['rate_of_tax'])
         quantity = int(request.POST['quantity'])
         rate = float(request.POST['rate'])
-        amount = float(request.POST['amount'])
-        gross_value = float(request.POST['gross_value'])
-        total = float(request.POST['total'])
-        sgst = float(request.POST['sgst'])
-        cgst = float(request.POST['cgst'])
-        grand_total = float(request.POST['grand_total'])
-        stock_in = StockIn.objects.get(id=request.POST['stock_in'])
-
+        
+        # Create the Bill instance
         bill = Bill(
-            invoice_number=invoice_number,
             m_id=m_id,
             date=date,
             bill_to_party=bill_to_party,
@@ -91,16 +85,28 @@ def sell(request):
             rate_of_tax=rate_of_tax,
             quantity=quantity,
             rate=rate,
-            amount=amount,
-            gross_value=gross_value,
-            total=total,
-            sgst=sgst,
-            cgst=cgst,
-            grand_total=grand_total,
         )
+
+        # Save the Bill instance
         bill.save()
 
         return redirect('dashboard')
 
     materials = StockCurrent.objects.all()
     return render(request, 'billing_app/sell.html', {'materials': materials})
+
+def print_bill(request, pk):
+    bill = get_object_or_404(Bill, pk=pk)
+    
+    sgst = bill.total * bill.rate_of_tax / 200
+    cgst = bill.total * bill.rate_of_tax / 200
+    
+    pdf_path = generate_bill_pdf(bill)
+    
+    if pdf_path:
+        with open(pdf_path, 'rb') as pdf:
+            response = HttpResponse(pdf.read(), content_type='application/pdf')
+            response['Content-Disposition'] = f'inline; filename=bill_{bill.invoice_number}.pdf'
+            return response
+    else:
+        return HttpResponse("Error generating PDF", status=400)
