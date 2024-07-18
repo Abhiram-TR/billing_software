@@ -1,7 +1,8 @@
-   
 from django.urls import path
-from .views import stock_in_create
+from . import views
 
 urlpatterns = [
-    path('', stock_in_create, name='stock_in_create'),
+    path('', views.dashboard, name='dashboard'),
+    path('add_stock/', views.add_stock, name='add_stock'),
+    path('sell/', views.sell, name='sell'),
 ]

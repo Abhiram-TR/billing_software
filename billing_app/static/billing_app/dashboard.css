@@ -1,0 +1,136 @@
+/* Base styling for dark mode */
+body {
+      background-color: #121212;
+      color: #E0E0E0;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 20px;
+  }
+  
+  h1, h2 {
+      color: #BB86FC;
+  }
+  
+  table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+  }
+  
+  th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #333;
+  }
+  
+  th {
+      background-color: #1F1F1F;
+      color: #BB86FC;
+  }
+  
+  tr:nth-child(even) {
+      background-color: #1F1F1F;
+  }
+  
+  tr:hover {
+      background-color: #333;
+      transition: background-color 0.3s;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+      from {
+          opacity: 0;
+          transform: translateY(10px);
+      }
+      to {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+  
+  h1, h2, table {
+      animation: fadeIn 1s ease-out;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+      body {
+          padding: 10px;
+      }
+  
+      table {
+          font-size: 14px;
+      }
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+      width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+      background: #333;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+      background: #BB86FC;
+      border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+      background: #9a68e2;
+  }
+  
+  /* Button styling */
+  button {
+      background-color: #BB86FC;
+      border: none;
+      color: #121212;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 10px 2px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+  }
+  
+  button:hover {
+      background-color: #9a68e2;
+  }
+  
+  /* Input styling */
+  input, select {
+      background-color: #1F1F1F;
+      color: #E0E0E0;
+      border: 1px solid #333;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+  }
+  
+  input:focus, select:focus {
+      outline: none;
+      border-color: #BB86FC;
+  }
+.button-group {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.button-group button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button-group button:hover {
+    background-color: #45a049;
+}

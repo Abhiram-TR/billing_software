@@ -1,0 +1,118 @@
+/* Base styling for dark mode */
+body {
+      background-color: #121212;
+      color: #E0E0E0;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+  }
+  
+  .container {
+      background-color: #1F1F1F;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      width: 100%;
+      max-width: 600px;
+  }
+  
+  h1 {
+      color: #BB86FC;
+      text-align: center;
+      margin-bottom: 20px;
+  }
+  
+  .form-group {
+      margin-bottom: 15px;
+  }
+  
+  label {
+      display: block;
+      margin-bottom: 5px;
+  }
+  
+  input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      background-color: #333;
+      border: 1px solid #444;
+      border-radius: 5px;
+      color: #E0E0E0;
+      box-sizing: border-box;
+  }
+  
+  input:focus, select:focus {
+      outline: none;
+      border-color: #BB86FC;
+  }
+  
+  button {
+      width: 100%;
+      padding: 10px;
+      background-color: #BB86FC;
+      border: none;
+      color: #121212;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+  }
+  
+  button:hover {
+      background-color: #9a68e2;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+      from {
+          opacity: 0;
+          transform: translateY(10px);
+      }
+      to {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+  
+  .container {
+      animation: fadeIn 1s ease-out;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+      body {
+          padding: 10px;
+      }
+  
+      .container {
+          padding: 15px;
+      }
+  
+      input, select, button {
+          font-size: 14px;
+      }
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+      width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+      background: #333;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+      background: #BB86FC;
+      border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+      background: #9a68e2;
+  }
+  

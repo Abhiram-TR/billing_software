@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'billing_app/dashboard.css' %}">
+</head>
+<body>
+    <h1>Dashboard</h1>
+    
+    <div class="button-group">
+        <button onclick="window.location.href='{% url 'add_stock' %}'">Add Stock</button>
+        <button onclick="window.location.href='{% url 'sell' %}'">Sell</button>
+    </div>
+
+    <h2>Current Stock</h2>
+    <table>
+        <tr>
+            <th>Material Name</th>
+            <th>Quantity</th>
+        </tr>
+        {% for stock in current_stock %}
+        <tr>
+            <td>{{ stock.material_name }}</td>
+            <td>{{ stock.quantity }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Recent Stock Ins</h2>
+    <table>
+        <tr>
+            <th>Material Name</th>
+            <th>Quantity</th>
+            <th>Taxable Value</th>
+            <th>Tax Percentage</th>
+            <th>Date</th>
+        </tr>
+        {% for stock_in in recent_stock_ins %}
+        <tr>
+            <td>{{ stock_in.m_id.material_name }}</td>
+            <td>{{ stock_in.quantity }}</td>
+            <td>{{ stock_in.taxable_value }}</td>
+            <td>{{ stock_in.tax_percentage }}</td>
+            <td>{{ stock_in.date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Recent Bills</h2>
+    <table>
+        <tr>
+            <th>Invoice Number</th>
+            <th>Material Name</th>
+            <th>Date</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+        {% for bill in recent_bills %}
+        <tr>
+            <td>{{ bill.invoice_number }}</td>
+            <td>{{ bill.m_id.material_name }}</td>
+            <td>{{ bill.date }}</td>
+            <td>{{ bill.quantity }}</td>
+            <td>{{ bill.total }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

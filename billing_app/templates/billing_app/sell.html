@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Material</title>
+    <link rel="stylesheet" href="{% static 'billing_app/sell.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Sell Material</h1>
+        
+        <form method="post" action="{% url 'sell' %}">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="invoice_number">Invoice Number:</label>
+                <input type="text" id="invoice_number" name="invoice_number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="material_name">Material Name:</label>
+                <select id="material_name" name="m_id" required>
+                    {% for material in materials %}
+                    <option value="{{ material.id }}">{{ material.material_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="bill_to_party">Bill To Party:</label>
+                <input type="text" id="bill_to_party" name="bill_to_party" required>
+            </div>
+
+            <div class="form-group">
+                <label for="gstin_B">GSTIN (B):</label>
+                <input type="text" id="gstin_B" name="gstin_B" required>
+            </div>
+
+            <div class="form-group">
+                <label for="ship_to_party">Ship To Party:</label>
+                <input type="text" id="ship_to_party" name="ship_to_party" required>
+            </div>
+
+            <div class="form-group">
+                <label for="gstin_s">GSTIN (S):</label>
+                <input type="text" id="gstin_s" name="gstin_s" required>
+            </div>
+
+            <div class="form-group">
+                <label for="hsn_code">HSN Code:</label>
+                <input type="text" id="hsn_code" name="hsn_code" required>
+            </div>
+
+            <div class="form-group">
+                <label for="rate_of_tax">Rate of Tax:</label>
+                <input type="number" id="rate_of_tax" name="rate_of_tax" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" min="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="rate">Rate:</label>
+                <input type="number" id="rate" name="rate" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="gross_value">Gross Value:</label>
+                <input type="number" id="gross_value" name="gross_value" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="total">Total:</label>
+                <input type="number" id="total" name="total" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="sgst">SGST:</label>
+                <input type="number" id="sgst" name="sgst" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cgst">CGST:</label>
+                <input type="number" id="cgst" name="cgst" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="grand_total">Grand Total:</label>
+                <input type="number" id="grand_total" name="grand_total" step="0.01" required>
+            </div>
+
+            <button type="submit">Sell Material</button>
+        </form>
+    </div>
+</body>
+</html>
